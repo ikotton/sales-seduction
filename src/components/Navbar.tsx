@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'motion/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const NAV_LINKS = [
   { label: 'the phrases', href: '#phrases' },
@@ -33,9 +33,30 @@ function Clover({ className = '' }: { className?: string }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  // The spec'd gradient is built for the light hero. Past it the bar crosses dark
+  // sections, where a translucent light wash leaves the links grey-on-grey — so
+  // once we're off the hero the bar goes solid and the links stay readable.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.85)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 py-6 md:py-10 bg-gradient-to-b from-[#f1f1f1]/80 to-transparent backdrop-blur-[2px]">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'py-4 md:py-5 bg-bg-base/90 backdrop-blur-xl border-b border-black/[0.06]'
+          : 'py-6 md:py-10 bg-gradient-to-b from-[#f1f1f1]/80 to-transparent backdrop-blur-[2px]'
+      }`}
+    >
       <div className="grid grid-cols-12 max-w-7xl mx-auto px-8 md:px-16 lg:px-20 items-center gap-x-4">
         {/* Cols 1–3 · brand */}
         <a href="#top" className="col-span-6 md:col-span-3 flex items-center gap-2.5">

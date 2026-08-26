@@ -24,7 +24,13 @@ export default function Hero() {
           className="w-full h-full object-cover opacity-100"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260603_132049_036591b8-6e92-4760-b94c-a7ea6eef315c.mp4"
         />
-        <div className="absolute top-0 left-0 w-full h-[54vh] sm:h-[64vh] bg-gradient-to-b from-bg-base via-bg-base/90 to-transparent"></div>
+        <div
+          className="absolute top-0 left-0 w-full h-[62vh] sm:h-[70vh]"
+          style={{
+            background:
+              'linear-gradient(to bottom, #EDEEF5 0%, #EDEEF5 46%, rgba(237,238,245,0.86) 66%, rgba(237,238,245,0) 100%)',
+          }}
+        ></div>
       </div>
 
       {/* Content */}
@@ -85,8 +91,9 @@ export default function Hero() {
                 </svg>
               </button>
             </form>
-            <p className="mt-3 text-[13px] text-[#8e8e8e]">
-              $99. Everything included — training, private community, and 12 months of live office hours.
+            <p className="mt-3 inline-block rounded-full bg-white/70 px-3.5 py-1.5 text-[13px] leading-snug text-[#5c5c5c] backdrop-blur-md">
+              $99. Everything included — training, private community, and 12 months of live office
+              hours.
             </p>
           </motion.div>
         </div>
