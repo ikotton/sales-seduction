@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Community from './components/Community'
 import Faq from './components/Faq'
 import FinalCta from './components/FinalCta'
@@ -13,9 +14,11 @@ import Testimonials from './components/Testimonials'
 import Why from './components/Why'
 
 export default function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-bg-base selection:bg-brand-green selection:text-black">
-      <Navbar />
+      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <main>
         <Hero />
         <Why />
