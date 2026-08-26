@@ -49,7 +49,7 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
     // Sum of three uniforms ≈ a bell curve, so x bunches around the middle.
     const sourceX = () => {
       const g = (Math.random() + Math.random() + Math.random()) / 3
-      return width * (0.5 + (g - 0.5) * 0.92)
+      return width * (0.5 + (g - 0.5) * 0.5)
     }
 
     const seed = () => {
@@ -60,9 +60,9 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
       flies = Array.from({ length: n }, () => ({
         x: sourceX(),
         y: Math.random() * FLOOR(),
-        vx: (Math.random() - 0.5) * 0.18,
+        vx: (Math.random() - 0.5) * 0.12,
         vy: -(0.05 + Math.random() * 0.14),
-        r: (1.5 + Math.random() * 2.9) * sizeScale,
+        r: (1.0 + Math.random() * 1.9) * sizeScale,
         color: Math.random() < 0.62 ? GOLD : BLUE,
         phase: Math.random() * Math.PI * 2,
         speed: 0.006 + Math.random() * 0.016,
@@ -89,7 +89,7 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
         if (!reduced) {
           // wander, so they never travel in straight lines
           f.drift += 0.014
-          f.x += f.vx + Math.cos(f.drift) * 0.2
+          f.x += f.vx + Math.cos(f.drift) * 0.12
           f.y += f.vy + Math.sin(f.drift * 0.7) * 0.15
           f.phase += f.speed
 
@@ -105,11 +105,11 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
 
         const twinkle = 0.5 + 0.5 * (0.5 + 0.5 * Math.sin(f.phase))
         const [r, g, b] = f.color
-        const glow = f.r * 7
+        const glow = f.r * 4.2
 
         const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, glow)
         grad.addColorStop(0, `rgba(${r},${g},${b},${1 * twinkle})`)
-        grad.addColorStop(0.3, `rgba(${r},${g},${b},${0.38 * twinkle})`)
+        grad.addColorStop(0.25, `rgba(${r},${g},${b},${0.45 * twinkle})`)
         grad.addColorStop(1, `rgba(${r},${g},${b},0)`)
 
         ctx.fillStyle = grad
