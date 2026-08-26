@@ -10,6 +10,7 @@ type Firefly = {
   phase: number
   speed: number
   drift: number
+  wide: boolean
 }
 
 const GOLD: [number, number, number] = [255, 190, 70]
@@ -46,8 +47,11 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
     const CEILING = -24
     const FLOOR = () => height * 0.62
 
-    // Sum of three uniforms ≈ a bell curve, so x bunches around the middle.
-    const sourceX = () => {
+    // Two populations. The column bunches around the light (sum of three
+    // uniforms ≈ a bell curve); the wide ones spread edge to edge so the top
+    // corners aren't dead space.
+    const sourceX = (wide: boolean) => {
+      if (wide) return Math.random() * width
       const g = (Math.random() + Math.random() + Math.random()) / 3
       return width * (0.5 + (g - 0.5) * 0.5)
     }
@@ -57,17 +61,21 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
       const byArea = Math.round((width * height) / 10000)
       const n = Math.max(48, Math.min(count, byArea))
 
-      flies = Array.from({ length: n }, () => ({
-        x: sourceX(),
-        y: Math.random() * FLOOR(),
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: -(0.05 + Math.random() * 0.14),
-        r: (1.0 + Math.random() * 1.9) * sizeScale,
-        color: Math.random() < 0.62 ? GOLD : BLUE,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.006 + Math.random() * 0.016,
-        drift: Math.random() * Math.PI * 2,
-      }))
+      flies = Array.from({ length: n }, () => {
+        const wide = Math.random() < 0.5
+        return {
+          x: sourceX(wide),
+          y: Math.random() * FLOOR(),
+          vx: (Math.random() - 0.5) * (wide ? 0.18 : 0.12),
+          vy: -(0.05 + Math.random() * (wide ? 0.1 : 0.14)),
+          r: (1.0 + Math.random() * (wide ? 1.5 : 1.9)) * sizeScale,
+          color: Math.random() < 0.62 ? GOLD : BLUE,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.006 + Math.random() * 0.016,
+          drift: Math.random() * Math.PI * 2,
+          wide,
+        }
+      })
     }
 
     const resize = () => {
@@ -97,7 +105,7 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
           // bottom of the band near the centre.
           if (f.y < CEILING || f.y > FLOOR()) {
             f.y = FLOOR()
-            f.x = sourceX()
+            f.x = sourceX(f.wide)
           }
           if (f.x < -24) f.x = width + 24
           if (f.x > width + 24) f.x = -24

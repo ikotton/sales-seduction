@@ -26,7 +26,10 @@ export default function Navbar({ menuOpen, setMenuOpen }: Props) {
   }, [])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    // No background over the hero — a solid bar there reads as a black box
+    // sitting on the video. It only appears once the light sections start,
+    // where white nav text needs something behind it.
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight - 90)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
