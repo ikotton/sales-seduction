@@ -1,5 +1,6 @@
 import { Flower2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import Logo from './Logo'
 
 const ENTRANCE = 'cubic-bezier(0.16, 1, 0.3, 1)'
 const OVERLAY = 'cubic-bezier(0.76, 0, 0.24, 1)'
@@ -59,12 +60,8 @@ export default function Navbar({ menuOpen, setMenuOpen }: Props) {
         }`}
       >
         <div className="max-w-[1440px] mx-auto px-6 md:px-10 flex items-center justify-between h-16 md:h-20">
-          <a
-            href="#top"
-            className={`text-white text-xl md:text-2xl font-semibold tracking-tight z-50 ${slide}`}
-            style={enter(0)}
-          >
-            Sales Seduction
+          <a href="#top" className={`z-50 ${slide}`} style={enter(0)} aria-label="Sales Seduction">
+            <Logo />
           </a>
 
           <button
