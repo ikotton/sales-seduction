@@ -12,7 +12,7 @@ export default function Footer() {
             </div>
           </div>
           <p className="max-w-[90ch] text-[12px] leading-relaxed text-white/30">
-            © Kotton Grammer Media. Earnings disclaimer: results described on this page are not
+            © Alien Tech LLC. Earnings disclaimer: results described on this page are not
             typical and are not a guarantee of your own results. Your outcomes depend on your
             effort, experience, and market.
           </p>
