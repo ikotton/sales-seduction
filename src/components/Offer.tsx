@@ -1,7 +1,7 @@
 import Reveal, { SectionLabel } from './Reveal'
 
 const ITEMS: [string, string][] = [
-  ['The full video training — all 24 phrases', '$499 value'],
+  ['The full video training, all 24 phrases', '$499 value'],
   ['The complete slide deck', '$99 value'],
   ['Printable phrase cheat-sheet', '$49 value'],
   ['Real call examples', '$199 value'],
@@ -17,14 +17,14 @@ export default function Offer() {
       <div className="max-w-3xl mx-auto px-8 md:px-16">
         <Reveal className="text-center">
           <SectionLabel>Everything included</SectionLabel>
-          <h2 className="mt-4 font-display font-light tracking-[-0.03em] leading-[1.05] text-[36px] md:text-[52px] lg:text-[60px]">
-            <span className="text-[#1a1a1a]">One price.</span>{' '}
-            <span className="text-[#8e8e8e]">The whole system.</span>
+          <h2 className="mt-4 font-instrument font-normal tracking-[-0.03em] leading-[1.05] text-[36px] md:text-[52px] lg:text-[60px]">
+            <span className="text-[#121214]">One price.</span>{' '}
+            <span className="text-[#86827A]">The whole system.</span>
           </h2>
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="mt-12 rounded-3xl bg-white p-8 md:p-12 shadow-[0_1px_2px_rgba(16,18,40,0.04),0_24px_60px_-20px_rgba(16,18,40,0.18)]">
+          <div className="mt-12 rounded-[3px] bg-white p-8 md:p-12 border border-black/[0.09] rounded-[3px]">
             <div className="flex flex-col">
               {ITEMS.map(([label, value], i) => (
                 <div
@@ -33,29 +33,29 @@ export default function Offer() {
                     i < ITEMS.length - 1 ? 'border-b border-black/[0.06]' : ''
                   }`}
                 >
-                  <span className="text-[15px] text-[#1a1a1a]">{label}</span>
-                  <span className="whitespace-nowrap text-[14px] text-[#a3a3a3]">{value}</span>
+                  <span className="text-[15px] text-[#121214]">{label}</span>
+                  <span className="whitespace-nowrap text-[14px] text-[#9C978C]">{value}</span>
                 </div>
               ))}
             </div>
 
             <div className="mt-8 flex flex-wrap items-end justify-between gap-6 border-t border-black/10 pt-7">
               <div>
-                <span className="text-[14px] text-[#a3a3a3] line-through">Total value: $2,243</span>
-                <div className="mt-1 font-display text-[46px] md:text-[54px] font-light leading-none text-[#1a1a1a]">
-                  Today: <span className="text-[#1a1a1a]">$99</span>
+                <span className="text-[14px] text-[#9C978C] line-through">Total value: $2,243</span>
+                <div className="mt-1 font-instrument text-[46px] md:text-[54px] font-light leading-none text-[#121214]">
+                  Today: <span className="text-[#121214]">$99</span>
                 </div>
               </div>
               <a
                 href="#buy"
                 data-checkout
-                className="inline-flex items-center gap-2 rounded-full bg-[#1a1a1a] px-8 py-4 text-[15px] font-medium text-white transition-colors hover:bg-black"
+                className="inline-flex items-center gap-2 rounded-full bg-[#121214] px-8 py-4 text-[15px] font-medium text-white transition-colors hover:bg-black"
               >
                 Get instant access <span aria-hidden="true">→</span>
               </a>
             </div>
 
-            <p className="mt-6 text-center text-[13px] text-[#a3a3a3]">
+            <p className="mt-6 text-center text-[13px] text-[#9C978C]">
               30-day money-back guarantee · Secure checkout · Instant access
             </p>
           </div>

@@ -6,8 +6,14 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
 
-  --color-brand-green: #9fff00;
-  --color-bg-base: #EDEEF5;
+  /* Warm bone rather than cool lavender-grey, so the page reads as a brand
+     surface instead of a dashboard. Champagne picks up the gold in the hero. */
+  --color-bg-base: #F1EFEA;
+  --color-bone: #F1EFEA;
+  --color-ink: #121214;
+  --color-champagne: #C0A062;
+  --color-muted: #86827A;
+  --color-brand-green: #C0A062;
 }
 
 body {

@@ -25,6 +25,6 @@ export default function Reveal({
 
 export function SectionLabel({ children }: { children: ReactNode }) {
   return (
-    <p className="text-[12px] tracking-[0.22em] uppercase text-[#8e8e8e]">{children}</p>
+    <p className="text-[12px] tracking-[0.22em] uppercase text-[#86827A]">{children}</p>
   )
 }

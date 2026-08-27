@@ -26,7 +26,7 @@ export default function Navbar({ menuOpen, setMenuOpen }: Props) {
   }, [])
 
   useEffect(() => {
-    // No background over the hero — a solid bar there reads as a black box
+    // No background over the hero. A solid bar there reads as a black box
     // sitting on the video. It only appears once the light sections start,
     // where white nav text needs something behind it.
     const onScroll = () => setScrolled(window.scrollY > window.innerHeight - 90)
@@ -141,7 +141,7 @@ export default function Navbar({ menuOpen, setMenuOpen }: Props) {
               transitionDelay: menuOpen ? `${150 + LINKS.length * 80}ms` : '0ms',
             }}
           >
-            Get instant access — $99
+            Get instant access for $99
           </a>
         </div>
       </div>

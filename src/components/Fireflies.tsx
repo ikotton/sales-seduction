@@ -41,8 +41,8 @@ export default function Fireflies({ count = 170 }: { count?: number }) {
     // atmosphere on a desktop swarm the copy on a phone.
     let sizeScale = 1
 
-    // Everything lives above the woman's head — the band from the top of the
-    // frame down to roughly where the light leaves her — and clusters toward
+    // Everything lives above the woman's head: the band from the top of the
+    // frame down to roughly where the light leaves her. They cluster toward
     // the centre, so they read as rising off her rather than as random scatter.
     const CEILING = -24
     const FLOOR = () => height * 0.62

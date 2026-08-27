@@ -17,7 +17,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-bg-base selection:bg-brand-green selection:text-black">
+    <div className="min-h-screen bg-bg-base selection:bg-champagne selection:text-black">
       <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <main>
         <Hero />

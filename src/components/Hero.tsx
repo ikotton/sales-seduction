@@ -56,7 +56,7 @@ export default function Hero() {
           className={`text-white/70 text-base md:text-lg mb-8 md:mb-10 max-w-md mx-auto ${rise}`}
           style={enter(600)}
         >
-          For women who want to earn more and work from anywhere — even if you've never sold a
+          For women who want to earn more and work from anywhere, even if you've never sold a
           thing.
         </p>
 
@@ -65,7 +65,7 @@ export default function Hero() {
           className={`inline-block px-8 py-3.5 bg-white text-black text-sm md:text-base font-medium rounded-full hover:bg-white/90 ${rise}`}
           style={enter(800)}
         >
-          Get instant access — $99
+          Get instant access for $99
         </a>
       </div>
     </section>
