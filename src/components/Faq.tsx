@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useState } from 'react'
-import Reveal from './Reveal'
+import { Rise, Rule, Words } from './Kinetic'
 
 const QUESTIONS = [
   {
@@ -37,55 +37,57 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="w-full bg-bg-base pb-24 md:pb-32 scroll-mt-24">
-      <div className="max-w-3xl mx-auto px-8 md:px-16">
-        <Reveal>
-          <h2 className="text-center font-instrument font-normal tracking-[-0.03em] leading-[1.05] text-[36px] md:text-[52px] lg:text-[60px] text-[#121214]">
-            Questions, answered
-          </h2>
-        </Reveal>
-
-        <Reveal delay={0.06}>
-          <div className="mt-12 overflow-hidden rounded-[3px] bg-white border border-black/[0.09] rounded-[3px]">
-            {QUESTIONS.map((item, i) => {
-              const isOpen = open === i
-              return (
-                <div key={item.q} className={i > 0 ? 'border-t border-black/[0.06]' : ''}>
-                  <button
-                    type="button"
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-5 px-7 py-6 text-left"
-                  >
-                    <span className="text-[16px] font-medium text-[#121214]">{item.q}</span>
-                    <motion.span
-                      animate={{ rotate: isOpen ? 45 : 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-bg-base text-[18px] leading-none text-[#121214]"
-                    >
-                      +
-                    </motion.span>
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <p className="px-7 pb-6 text-[15px] leading-relaxed text-[#86827A]">
-                          {item.a}
-                        </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              )
-            })}
+    <section id="faq" className="relative z-10 w-full scroll-mt-24 pb-32 md:pb-44">
+      <div className="mx-auto max-w-[1400px] px-8 md:px-16 lg:px-20">
+        <Rise>
+          <div className="flex items-baseline gap-5">
+            <span className="font-instrument text-[15px] text-gold">07</span>
+            <span className="text-[11px] uppercase tracking-[0.24em] text-white/40">Before you ask</span>
           </div>
-        </Reveal>
+        </Rise>
+        <Rule className="mt-5" />
+
+        <h2 className="mt-12 font-instrument text-[44px] leading-[0.95] tracking-[-0.02em] text-white sm:text-[64px] lg:text-[86px]">
+          <Words text="Questions, answered" />
+        </h2>
+
+        <div className="mt-16">
+          {QUESTIONS.map((item, i) => {
+            const isOpen = open === i
+            return (
+              <div key={item.q} className="border-t border-white/10">
+                <button type="button" onClick={() => setOpen(isOpen ? null : i)} aria-expanded={isOpen}
+                  className="group flex w-full items-baseline gap-6 py-8 text-left md:gap-10 md:py-10">
+                  <span className="font-instrument text-[15px] text-white/30">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className={`flex-1 font-instrument text-[24px] leading-tight transition-colors duration-300 md:text-[32px] lg:text-[38px] ${
+                    isOpen ? 'text-gold' : 'text-white group-hover:text-gold'
+                  }`}>
+                    {item.q}
+                  </span>
+                  <motion.span animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-[20px] leading-none text-white">
+                    +
+                  </motion.span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
+                      <p className="max-w-[62ch] pb-10 text-[16px] leading-relaxed text-white/55 md:pl-[calc(15px+2.5rem)] md:text-[17px]">
+                        {item.a}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )
+          })}
+          <div className="border-t border-white/10" />
+        </div>
       </div>
     </section>
   )

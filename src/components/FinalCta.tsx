@@ -1,35 +1,30 @@
-import Reveal from './Reveal'
+import { Rise, Words } from './Kinetic'
 
 export default function FinalCta() {
   return (
-    <section className="w-full bg-bg-base pb-24 md:pb-32">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-20">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[3px] bg-[#121214] px-8 py-20 md:px-16 md:py-28 text-center">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-1/3 left-1/2 h-[70%] w-[70%] -translate-x-1/2 rounded-full bg-champagne/10 blur-[100px]"
-            />
+    <section className="relative z-10 w-full pb-32 md:pb-44">
+      <div className="mx-auto max-w-[1400px] px-8 md:px-16 lg:px-20">
+        <Rise>
+          <div className="relative overflow-hidden rounded-[6px] border border-white/10 bg-white/[0.02] px-8 py-28 text-center backdrop-blur-md md:px-16 md:py-40">
+            <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/3 rounded-full bg-gold/20 blur-[110px]" />
             <div className="relative">
-              <h2 className="mx-auto font-instrument font-normal tracking-[-0.03em] leading-[1.02] text-[38px] sm:text-[52px] md:text-[72px]">
-                <span className="text-white">The words are simple.</span>
+              <h2 className="mx-auto font-instrument text-[42px] leading-[0.98] text-white sm:text-[62px] md:text-[86px] lg:text-[104px]">
+                <Words text="The words are simple." />
                 <br />
-                <span className="text-champagne">The career is real.</span>
+                <Words text="The career is real." accentFrom={0} delay={0.22} />
               </h2>
-              <p className="mx-auto mt-8 max-w-[52ch] text-[17px] leading-relaxed text-[#a0a0a0]">
-                24 battle-tested phrases. A private community of women in sales. Twelve months of live
-                office hours. A 30-day money-back guarantee. All of it for $99.
+              <p className="mx-auto mt-9 max-w-[54ch] text-[17px] leading-relaxed text-white/55 md:text-[19px]">
+                24 battle-tested phrases. A private community of women in sales. Twelve months of
+                live office hours. A 30-day money-back guarantee. All of it for $99.
               </p>
-              <a
-                href="#buy"
-                className="mt-10 inline-flex items-center gap-2 rounded-full bg-champagne px-9 py-4 text-[15px] font-semibold text-[#121214] transition-transform hover:-translate-y-0.5"
-              >
+              <a href="#buy"
+                className="mt-12 inline-flex items-center gap-2 rounded-full bg-gold px-10 py-4 text-[16px] font-semibold text-black transition-transform duration-300 hover:-translate-y-0.5">
                 Get instant access for $99 <span aria-hidden="true">→</span>
               </a>
-              <p className="mt-5 text-[13px] text-[#7a7a7a]">Secure checkout · Instant access</p>
+              <p className="mt-6 text-[13px] text-white/35">Secure checkout · Instant access</p>
             </div>
           </div>
-        </Reveal>
+        </Rise>
       </div>
     </section>
   )

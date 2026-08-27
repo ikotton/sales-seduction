@@ -1,51 +1,60 @@
-import Reveal from './Reveal'
+import { motion, useScroll, useTransform } from 'motion/react'
+import { useRef } from 'react'
+import { Rise, Rule, Words } from './Kinetic'
 
 const STEPS = [
-  {
-    step: 'Step 1',
-    title: 'Watch the training',
-    body: 'About 90 minutes, start to finish. Watch it tonight.',
-  },
-  {
-    step: 'Step 2',
-    title: 'Download the cheat-sheet',
-    body: 'All 24 phrases and the slides, printable. Keep it next to your laptop.',
-  },
-  {
-    step: 'Step 3',
-    title: 'Use it on your very next call',
-    body: "Stack the phrases in your own voice. This isn't a script. Then bring what happened to office hours.",
-  },
+  { t: 'Watch the training', b: 'About 90 minutes, start to finish. Watch it tonight.' },
+  { t: 'Download the cheat-sheet', b: 'All 24 phrases and the slides, printable. Keep it next to your laptop.' },
+  { t: 'Use it on your very next call', b: "Stack the phrases in your own voice. This isn't a script. Then bring what happened to office hours." },
 ]
 
 export default function HowItWorks() {
-  return (
-    <section id="how-it-works" className="w-full bg-bg-base pb-24 md:pb-32 scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-20">
-        <Reveal>
-          <h2 className="font-instrument font-normal tracking-[-0.03em] leading-[1.05] text-[36px] md:text-[52px] lg:text-[64px] text-[#121214]">
-            How it works
-          </h2>
-        </Reveal>
+  const ref = useRef<HTMLDivElement | null>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 80%', 'end 60%'] })
+  const grow = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
-        <div className="mt-14 grid grid-cols-1 md:grid-cols-3">
-          {STEPS.map((item, i) => (
-            <Reveal
-              key={item.step}
-              delay={i * 0.08}
-              className={i > 0 ? 'md:border-l md:border-black/[0.09]' : ''}
-            >
-              <div className={`h-full py-9 md:py-2 ${i > 0 ? 'md:pl-10' : ''} ${i < 2 ? 'md:pr-10' : ''}`}>
-                <div className="font-instrument text-[15px] tracking-wide text-champagne">
-                  {item.step}
+  return (
+    <section id="how-it-works" className="relative z-10 w-full scroll-mt-24 pb-32 md:pb-44">
+      <div className="mx-auto max-w-[1400px] px-8 md:px-16 lg:px-20">
+        <Rise>
+          <div className="flex items-baseline gap-5">
+            <span className="font-instrument text-[15px] text-gold">04</span>
+            <span className="text-[11px] uppercase tracking-[0.24em] text-white/40">Three steps</span>
+          </div>
+        </Rise>
+        <Rule className="mt-5" />
+
+        <h2 className="mt-12 font-instrument text-[44px] leading-[0.95] tracking-[-0.02em] text-white sm:text-[64px] lg:text-[86px]">
+          <Words text="How it works" />
+        </h2>
+
+        <div ref={ref} className="relative mt-24">
+          {/* the line draws itself as you scroll through the three steps */}
+          <div className="absolute left-0 right-0 top-[14px] hidden h-px bg-white/10 md:block">
+            <motion.div style={{ width: grow }} className="h-px bg-gold" />
+          </div>
+
+          <div className="grid grid-cols-1 gap-16 md:grid-cols-3 md:gap-10">
+            {STEPS.map((s, i) => (
+              <Rise key={s.t} delay={i * 0.12}>
+                <div className="relative">
+                  <div className="hidden md:block">
+                    <span className="block h-[29px] w-px bg-transparent" />
+                    <span className="absolute left-0 top-[9px] h-[11px] w-[11px] rounded-full border border-gold bg-bg-base" />
+                  </div>
+                  <div className="font-instrument text-[64px] leading-none text-gold md:mt-6 md:text-[76px]">
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                  <h3 className="mt-6 font-instrument text-[30px] leading-tight text-white lg:text-[36px]">
+                    {s.t}
+                  </h3>
+                  <p className="mt-4 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
+                    {s.b}
+                  </p>
                 </div>
-                <h3 className="mt-4 font-instrument text-[26px] font-normal leading-tight text-[#121214]">
-                  {item.title}
-                </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#86827A]">{item.body}</p>
-              </div>
-            </Reveal>
-          ))}
+              </Rise>
+            ))}
+          </div>
         </div>
       </div>
     </section>

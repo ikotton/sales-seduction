@@ -1,4 +1,4 @@
-import Reveal from './Reveal'
+import { Count, Rise, Rule, Words } from './Kinetic'
 
 const STATS = [
   {
@@ -20,37 +20,53 @@ const STATS = [
 
 export default function Why() {
   return (
-    <section id="why" className="w-full bg-bg-base py-24 md:py-32 scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-20">
-        <Reveal className="flex flex-wrap items-end justify-between gap-6 border-b border-black/10 pb-8">
-          <h2 className="font-instrument font-normal tracking-[-0.03em] leading-[1.05] text-[36px] md:text-[52px] lg:text-[64px] max-w-[14ch] text-[#121214]">
-            Why sales. Why now.
-          </h2>
-          <p className="text-[13px] tracking-[0.16em] uppercase text-[#86827A] leading-relaxed">
-            No product to build. No audience to grow.
-            <br />
-            Just a skill that pays.
-          </p>
-        </Reveal>
+    <section id="why" className="relative z-10 w-full scroll-mt-24 py-32 md:py-44">
+      <div className="mx-auto max-w-[1400px] px-8 md:px-16 lg:px-20">
+        <Rise>
+          <div className="flex items-baseline gap-5">
+            <span className="font-instrument text-[15px] text-gold">01</span>
+            <span className="text-[11px] uppercase tracking-[0.24em] text-white/40">The case</span>
+          </div>
+        </Rise>
+        <Rule className="mt-5" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 mt-14">
+        <div className="mt-12 flex flex-wrap items-end justify-between gap-x-16 gap-y-8">
+          <h2 className="font-instrument text-[44px] leading-[0.95] tracking-[-0.02em] text-white sm:text-[64px] lg:text-[86px] xl:text-[98px]">
+            <Words text="Why sales." /> <Words text="Why now." accentFrom={0} delay={0.18} />
+          </h2>
+          <Rise delay={0.2}>
+            <p className="max-w-[30ch] text-[13px] uppercase leading-relaxed tracking-[0.18em] text-white/45">
+              No product to build. No audience to grow.
+              <br />
+              Just a skill that pays.
+            </p>
+          </Rise>
+        </div>
+
+        <div className="mt-24 grid grid-cols-1 gap-y-16 md:grid-cols-3 md:gap-x-10">
           {STATS.map((stat, i) => (
-            <Reveal
-              key={stat.figure}
-              delay={i * 0.08}
-              className={i > 0 ? 'md:border-l md:border-black/[0.09]' : ''}
-            >
-              <div className={`h-full py-10 md:py-2 ${i > 0 ? 'md:pl-10' : ''} ${i < 2 ? 'md:pr-10' : ''}`}>
-                <div className="font-instrument font-normal leading-none text-[64px] md:text-[80px] text-[#121214]">
-                  {stat.figure}
+            <Rise key={stat.figure} delay={i * 0.1} parallax={i === 1 ? 26 : 14}>
+              <div
+                className={`group relative h-full ${
+                  i > 0 ? 'md:border-l md:border-white/10 md:pl-10' : ''
+                }`}
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-10 -top-16 h-56 w-56 rounded-full bg-gold/10 opacity-0 blur-[70px] transition-opacity duration-700 group-hover:opacity-100"
+                />
+                <div className="relative font-instrument leading-[0.82] text-white text-[84px] md:text-[104px] lg:text-[132px]">
+                  <Count value={stat.figure} />
                 </div>
-                <div className="mt-7 h-px w-12 bg-champagne" />
-                <h3 className="mt-6 text-[12px] font-medium uppercase tracking-[0.16em] text-[#121214]">
+                <div className="relative mt-8 h-px w-14 bg-gold" />
+                <h3 className="relative mt-7 text-[12px] font-medium uppercase tracking-[0.18em] text-white">
                   {stat.title}
                 </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#86827A]">{stat.body}</p>
+                <p className="relative mt-4 max-w-[34ch] text-[15px] leading-relaxed text-white/50">
+                  {stat.body}
+                </p>
               </div>
-            </Reveal>
+            </Rise>
           ))}
         </div>
       </div>

@@ -1,80 +1,89 @@
-import Reveal, { SectionLabel } from './Reveal'
+import { motion, useScroll, useTransform } from 'motion/react'
+import { useRef } from 'react'
+import { Rise, Rule, Words } from './Kinetic'
 
 const GROUPS = [
-  {
-    title: 'Openers',
-    body: 'Start conversations that make people lean in instead of guard up.',
-  },
-  {
-    title: 'Follow-ups',
-    body: 'Revive any conversation without the awkwardness, including one that can’t be answered with "no."',
-  },
-  {
-    title: 'Objection-handlers',
-    body: 'Dissolve "it’s too expensive," "I need to think," and the know-it-all, without arguing.',
-  },
-  {
-    title: 'Closers',
-    body: 'Make the yes feel like their idea, and keep it smooth to the finish.',
-  },
+  { n: '01', title: 'Openers', body: 'Start conversations that make people lean in instead of guard up.' },
+  { n: '02', title: 'Follow-ups', body: 'Revive any conversation without the awkwardness, including one that can’t be answered with "no."' },
+  { n: '03', title: 'Objection-handlers', body: 'Dissolve "it’s too expensive," "I need to think," and the know-it-all, without arguing.' },
+  { n: '04', title: 'Closers', body: 'Make the yes feel like their idea, and keep it smooth to the finish.' },
 ]
 
 export default function Phrases() {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const bigY = useTransform(scrollYProgress, [0, 1], [120, -120])
+  const bigScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1])
+
   return (
-    <section id="phrases" className="relative w-full overflow-hidden bg-bg-base py-24 md:py-32 scroll-mt-24">
-      <div
+    <section id="phrases" ref={ref} className="relative z-10 w-full scroll-mt-24 overflow-hidden py-32 md:py-44">
+      {/* the 24 drifts against the scroll so the section has depth */}
+      <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 grid place-items-center font-instrument font-normal leading-none text-[300px] sm:text-[45vw] text-black/[0.03] select-none"
+        style={{ y: bigY, scale: bigScale }}
+        className="pointer-events-none absolute inset-0 grid select-none place-items-center font-instrument leading-none text-white/[0.035]"
       >
-        24
-      </div>
+        <span className="text-[42vw]">24</span>
+      </motion.div>
 
-      <div className="relative max-w-5xl mx-auto px-8 md:px-16">
-        <Reveal className="text-center">
-          <SectionLabel>Inside the training</SectionLabel>
-          <h2 className="mx-auto mt-4 max-w-[16ch] font-instrument font-normal tracking-[-0.03em] leading-[1.04] text-[38px] md:text-[56px] lg:text-[68px]">
-            <span className="text-[#121214]">24 phrases. Word for word.</span>{' '}
-            <span className="text-[#86827A]">In your voice.</span>
-          </h2>
-          <p className="mx-auto mt-7 max-w-[58ch] text-[16px] leading-relaxed text-[#6B675F]">
-            Not scripts. Twenty-four short, exact phrases: openers, follow-ups, objection-handlers,
-            and closers. Each one engineered to lower resistance, make the buyer picture the result,
-            and close without pressure. You stack them in your own voice, in any conversation.
-          </p>
-          <p className="mx-auto mt-5 max-w-[58ch] text-[16px] leading-relaxed text-[#121214]">
-            Every phrase was developed to make sales simple for anyone, battle-tested to the tune of
-            over $30 million in sales created by Kotton Grammer.
-          </p>
-        </Reveal>
+      <div className="relative mx-auto max-w-[1400px] px-8 md:px-16 lg:px-20">
+        <Rise>
+          <div className="flex items-baseline gap-5">
+            <span className="font-instrument text-[15px] text-gold">03</span>
+            <span className="text-[11px] uppercase tracking-[0.24em] text-white/40">
+              Inside the training
+            </span>
+          </div>
+        </Rise>
+        <Rule className="mt-5" />
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
-          {GROUPS.map((group, i) => (
-            <Reveal
-              key={group.title}
-              delay={i * 0.07}
-              className={`${i % 2 === 1 ? 'sm:border-l sm:border-black/[0.09]' : ''} ${
-                i > 0 ? 'xl:border-l xl:border-black/[0.09]' : 'xl:border-l-0'
-              } ${i >= 2 ? 'sm:border-t sm:border-black/[0.09] xl:border-t-0' : ''}`}
-            >
-              <div className={`h-full py-9 ${i % 2 === 1 ? 'sm:pl-9' : ''} ${
-                i % 2 === 0 ? 'sm:pr-9' : ''
-              } xl:px-8 ${i === 0 ? 'xl:pl-0' : ''} ${i === 3 ? 'xl:pr-0' : ''}`}>
-                <div className="font-instrument text-[44px] leading-none text-champagne">6</div>
-                <h3 className="mt-6 text-[12px] font-medium uppercase tracking-[0.16em] text-[#121214]">
-                  {group.title}
+        <h2 className="mt-12 max-w-[16ch] font-instrument text-[44px] leading-[0.95] tracking-[-0.02em] text-white sm:text-[64px] lg:text-[86px]">
+          <Words text="24 phrases. Word for word." />
+        </h2>
+
+        <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <Rise delay={0.1} className="lg:col-span-7">
+            <p className="max-w-[56ch] text-[17px] leading-relaxed text-white/55 md:text-[19px]">
+              Not scripts. Twenty-four short, exact phrases: openers, follow-ups,
+              objection-handlers, and closers. Each one engineered to lower resistance, make the
+              buyer picture the result, and close without pressure.
+            </p>
+          </Rise>
+          <Rise delay={0.18} className="lg:col-span-5">
+            <p className="max-w-[46ch] text-[17px] leading-relaxed text-white md:text-[19px]">
+              Battle-tested to the tune of over{' '}
+              <span className="text-gold">$30 million in sales</span> created by Kotton Grammer.
+            </p>
+          </Rise>
+        </div>
+
+        <div className="mt-24 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {GROUPS.map((g, i) => (
+            <Rise key={g.title} delay={i * 0.08} parallax={i % 2 ? 22 : 8}>
+              <div className="group relative h-full overflow-hidden rounded-[4px] border border-white/10 bg-white/[0.03] p-8 backdrop-blur-md transition-colors duration-500 hover:border-gold/40">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold/20 opacity-0 blur-[60px] transition-opacity duration-700 group-hover:opacity-100"
+                />
+                <div className="relative flex items-baseline justify-between">
+                  <span className="font-instrument text-[56px] leading-none text-gold">6</span>
+                  <span className="text-[11px] tracking-[0.2em] text-white/30">{g.n}</span>
+                </div>
+                <h3 className="relative mt-7 text-[12px] font-medium uppercase tracking-[0.18em] text-white">
+                  {g.title}
                 </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#86827A]">{group.body}</p>
+                <p className="relative mt-3 text-[14px] leading-relaxed text-white/50">{g.body}</p>
               </div>
-            </Reveal>
+            </Rise>
           ))}
         </div>
 
-        <Reveal delay={0.1}>
-          <p className="mx-auto mt-12 max-w-[50ch] text-center text-[15px] text-[#86827A]">
-            The phrases themselves are inside the training, along with when to use each one, and real
-            call examples of them working.
+        <Rise delay={0.1}>
+          <p className="mx-auto mt-14 max-w-[52ch] text-center text-[15px] text-white/40">
+            The phrases themselves are inside the training, along with when to use each one, and
+            real call examples of them working.
           </p>
-        </Reveal>
+        </Rise>
       </div>
     </section>
   )
