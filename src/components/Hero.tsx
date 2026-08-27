@@ -21,12 +21,11 @@ export default function Hero() {
   }`
 
   return (
-    <section
-      id="top"
-      className="relative w-full h-screen overflow-hidden flex items-end justify-center bg-black"
-    >
+    <section id="top" className="relative w-full overflow-hidden bg-black">
+      {/* The frame carries the video's own 16:9. Container aspect equals source
+          aspect, so there is no crop and no letterboxing at any width. */}
       <div
-        className={`absolute inset-0 transition-all duration-[1400ms] ${
+        className={`relative w-full aspect-video transition-all duration-[1400ms] ${
           mounted ? 'scale-100 opacity-100' : 'scale-105 opacity-0'
         }`}
         style={{ transitionTimingFunction: ENTRANCE }}
@@ -36,37 +35,41 @@ export default function Hero() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover object-bottom"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_074625_a81f018a-956b-43fb-9aee-4d1508e30e6a.mp4"
+          preload="auto"
+          poster="/assets/hero-poster.jpg"
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/assets/hero.mp4"
         />
+        <Fireflies />
       </div>
 
-      <Fireflies />
+      {/* Copy sits bottom-left, clear of her and of the light rising off her. */}
+      <div className="relative z-20 px-6 pb-14 pt-10 text-center sm:absolute sm:inset-x-0 sm:bottom-0 sm:px-10 sm:pb-[6%] sm:pt-0 sm:text-left lg:px-16">
+        <div className="mx-auto max-w-4xl sm:mx-0 sm:max-w-2xl">
+          <h1
+            className={`font-instrument text-white text-[2rem] leading-[1.02] sm:text-[2.6rem] md:text-[3.4rem] lg:text-[4.2rem] ${rise}`}
+            style={enter(400)}
+          >
+            Turn simple words into a<br className="hidden sm:block" /> high-paying, remote sales
+            career
+          </h1>
 
-      <div className="relative z-10 text-center px-6 pb-[40vh] sm:pb-[42vh] md:pb-[44vh] max-w-4xl mx-auto">
-        <h1
-          className={`font-instrument text-white text-[2.5rem] leading-[0.95] sm:text-5xl md:text-6xl lg:text-7xl mb-5 md:mb-6 ${rise}`}
-          style={enter(400)}
-        >
-          Turn simple words into a
-          <br className="hidden sm:block" /> high-paying, remote sales career
-        </h1>
+          <p
+            className={`mt-5 max-w-md text-[15px] leading-relaxed text-white/70 sm:text-base md:text-lg mx-auto sm:mx-0 ${rise}`}
+            style={enter(600)}
+          >
+            For women who want to earn more and work from anywhere, even if you've never sold a
+            thing.
+          </p>
 
-        <p
-          className={`text-white/70 text-base md:text-lg mb-8 md:mb-10 max-w-md mx-auto ${rise}`}
-          style={enter(600)}
-        >
-          For women who want to earn more and work from anywhere, even if you've never sold a
-          thing.
-        </p>
-
-        <a
-          href="#buy"
-          className={`inline-block px-8 py-3.5 bg-white text-black text-sm md:text-base font-medium rounded-full hover:bg-white/90 ${rise}`}
-          style={enter(800)}
-        >
-          Get instant access for $99
-        </a>
+          <a
+            href="#buy"
+            className={`mt-7 inline-block rounded-full bg-white px-8 py-3.5 text-sm font-medium text-black transition-colors hover:bg-white/90 md:text-base ${rise}`}
+            style={enter(800)}
+          >
+            Get instant access for $99
+          </a>
+        </div>
       </div>
     </section>
   )
